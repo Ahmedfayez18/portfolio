@@ -1,0 +1,2971 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ahmed Mohamed Fayez - Flutter Developer & Mobile App Developer (iOS & Android). Portfolio showcasing cross-platform mobile apps, MVVM architecture, Bloc/Cubit, and REST APIs.">
+  <meta name="keywords" content="Ahmed Mohamed Fayez, Flutter Developer, Mobile App Developer, Dart, Android, iOS, Bloc, Cubit, MVVM, Egypt">
+  <meta name="author" content="Ahmed Mohamed Fayez">
+  
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ahmed Mohamed Fayez | Flutter Developer">
+  <meta property="og:description" content="Dedicated Flutter Developer crafting scalable, high-performance mobile applications with Dart, MVVM, and Bloc.">
+  
+  <title>Ahmed Mohamed Fayez | Flutter Developer</title>
+
+  <!-- Google Fonts: Inter (body) & Poppins (headings & branding) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS Custom Properties / Design Tokens (Flutter-inspired theme)
+       ========================================================================== */
+    :root {
+      /* Typography */
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      /* Flutter Palette & Accents */
+      --flutter-primary: #02569B;
+      --flutter-cyan: #0175C2;
+      --flutter-sky: #0284c7;
+      --flutter-light: #38bdf8;
+      --flutter-teal: #06b6d4;
+      --flutter-accent: #00E5FF;
+
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+      /* Border radius */
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 28px;
+      --radius-full: 9999px;
+    }
+
+    /* Dark Theme (Default) */
+    [data-theme="dark"] {
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #0f172a;
+      --bg-surface: #131e34;
+      --bg-surface-elevated: #1a2744;
+      --bg-glass: rgba(15, 23, 42, 0.75);
+      --bg-card: rgba(19, 30, 52, 0.65);
+      --bg-card-hover: rgba(26, 39, 68, 0.85);
+
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --text-highlight: #38bdf8;
+
+      --border-color: rgba(56, 189, 248, 0.12);
+      --border-hover: rgba(56, 189, 248, 0.4);
+      --border-subtle: rgba(255, 255, 255, 0.06);
+
+      --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+      --card-shadow-hover: 0 20px 40px -12px rgba(2, 132, 199, 0.25);
+      --glow-accent: rgba(56, 189, 248, 0.15);
+
+      --code-bg: #090d16;
+      --scrollbar-track: #0a0f1d;
+      --scrollbar-thumb: #1e293b;
+    }
+
+    /* Light Theme */
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #f1f5f9;
+      --bg-surface: #ffffff;
+      --bg-surface-elevated: #f8fafc;
+      --bg-glass: rgba(255, 255, 255, 0.82);
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-card-hover: #ffffff;
+
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --text-highlight: #0284c7;
+
+      --border-color: rgba(2, 132, 199, 0.16);
+      --border-hover: rgba(2, 132, 199, 0.45);
+      --border-subtle: rgba(0, 0, 0, 0.08);
+
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      --card-shadow-hover: 0 20px 35px -10px rgba(2, 132, 199, 0.18);
+      --glow-accent: rgba(2, 132, 199, 0.08);
+
+      --code-bg: #f1f5f9;
+      --scrollbar-track: #f8fafc;
+      --scrollbar-thumb: #cbd5e1;
+    }
+
+    /* ==========================================================================
+       Reset & Base Styles
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(2, 132, 199, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(6, 182, 212, 0.07) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: var(--radius-full);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--flutter-sky);
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--flutter-sky);
+      color: #ffffff;
+    }
+
+    /* Accessibility Focus */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--flutter-light);
+      outline-offset: 3px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-primary);
+    }
+
+    p {
+      color: var(--text-secondary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-fast);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Layout Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    /* Section Spacing & Headings */
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--flutter-light);
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 2.75rem);
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    [data-theme="light"] .gradient-text {
+      background: linear-gradient(135deg, #02569B 0%, #0284c7 60%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       Header & Sticky Navbar
+       ========================================================================== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: background-color var(--transition-normal), backdrop-filter var(--transition-normal), box-shadow var(--transition-normal), padding var(--transition-normal);
+      padding: 1.1rem 0;
+    }
+
+    .header.scrolled {
+      background-color: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-bottom: 1px solid var(--border-color);
+      padding: 0.75rem 0;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Brand Logo with Flutter Glyph */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+
+    .flutter-glyph {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      transition: transform var(--transition-normal);
+    }
+
+    .brand-logo:hover .flutter-glyph {
+      transform: rotate(15deg) scale(1.1);
+    }
+
+    .logo-code {
+      color: var(--flutter-light);
+      font-weight: 600;
+    }
+
+    /* Navigation Links */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    .nav-link {
+      font-size: 0.925rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background-color: rgba(56, 189, 248, 0.08);
+    }
+
+    .nav-link.active {
+      color: var(--flutter-light);
+      font-weight: 600;
+    }
+
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0.85rem;
+      right: 0.85rem;
+      height: 2px;
+      background: linear-gradient(90deg, #0284c7, #38bdf8);
+      border-radius: var(--radius-full);
+    }
+
+    /* Nav Actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--flutter-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--glow-accent);
+    }
+
+    .theme-toggle-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .sun-icon {
+      display: none;
+    }
+
+    [data-theme="light"] .sun-icon {
+      display: none;
+    }
+    [data-theme="light"] .moon-icon {
+      display: block;
+    }
+    [data-theme="dark"] .sun-icon {
+      display: block;
+    }
+    [data-theme="dark"] .moon-icon {
+      display: none;
+    }
+
+    /* Mobile Hamburger Menu */
+    .hamburger-btn {
+      display: none;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 0;
+      transition: all var(--transition-fast);
+    }
+
+    .hamburger-line {
+      width: 20px;
+      height: 2px;
+      background-color: var(--text-primary);
+      border-radius: 2px;
+      transition: transform var(--transition-normal), opacity var(--transition-normal);
+    }
+
+    .hamburger-btn.open .line-1 {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.open .line-2 {
+      opacity: 0;
+    }
+    .hamburger-btn.open .line-3 {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile Drawer */
+    .mobile-menu-drawer {
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.5rem;
+      transform: translateY(-120%);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform var(--transition-normal), opacity var(--transition-normal), visibility var(--transition-normal);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2);
+      z-index: 999;
+    }
+
+    .mobile-menu-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+      background-color: rgba(56, 189, 248, 0.1);
+      color: var(--flutter-light);
+    }
+
+    /* ==========================================================================
+       Buttons & Interactive Elements
+       ========================================================================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.8rem 1.6rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      border: none;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      transition: transform var(--transition-fast);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(2, 132, 199, 0.45);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(3px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-surface-elevated);
+      border-color: var(--flutter-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px var(--glow-accent);
+    }
+
+    .btn-sm {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Social Icons Group */
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition-fast);
+    }
+
+    .social-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .social-btn:hover {
+      color: var(--flutter-light);
+      border-color: var(--flutter-light);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px var(--glow-accent);
+    }
+
+    /* ==========================================================================
+       Hero Section & Phone Mockup
+       ========================================================================== */
+    .hero {
+      padding-top: 8.5rem;
+      padding-bottom: 5.5rem;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      color: #10b981;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 600;
+      width: fit-content;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    .hero-name {
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+    }
+
+    .hero-title {
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
+      font-weight: 600;
+      color: var(--text-highlight);
+      font-family: var(--font-heading);
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .hero-tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tech-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--flutter-sky);
+    }
+
+    /* Mobile Phone Mockup Showcase */
+    .phone-mockup-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .phone-mockup {
+      width: 300px;
+      height: 590px;
+      background: #000000;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow: 
+        0 25px 60px -15px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 0 3px rgba(255, 255, 255, 0.4);
+      position: relative;
+      transition: transform var(--transition-slow);
+    }
+
+    .phone-mockup:hover {
+      transform: translateY(-6px) rotate(-1deg);
+    }
+
+    /* Dynamic Island / Notch */
+    .phone-island {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 22px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+    }
+
+    .island-camera {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #111;
+      border: 1px solid #222;
+    }
+
+    /* Phone Screen Contents (Simulated Flutter App) */
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #0c1220;
+      border-radius: 36px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      font-size: 0.75rem;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-status-bar {
+      height: 38px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 1.25rem 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .phone-app-bar {
+      background: #131d33;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .phone-app-bar-title {
+      font-weight: 600;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #38bdf8;
+    }
+
+    .phone-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      overflow: hidden;
+    }
+
+    .phone-card {
+      background: #18233c;
+      border-radius: 14px;
+      padding: 0.85rem;
+      border: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .phone-card-title {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #f8fafc;
+      margin-bottom: 0.3rem;
+    }
+
+    .phone-card-desc {
+      font-size: 0.68rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    .phone-state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      background: rgba(2, 132, 199, 0.2);
+      color: #38bdf8;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+
+    .phone-metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .phone-metric-item {
+      background: #111a2e;
+      padding: 0.6rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .phone-metric-val {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .phone-metric-lbl {
+      font-size: 0.6rem;
+      color: #64748b;
+    }
+
+    .phone-nav-bar {
+      margin-top: auto;
+      background: #131d33;
+      padding: 0.65rem 1.25rem 1rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .phone-nav-icon {
+      color: #64748b;
+      font-size: 0.65rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .phone-nav-icon.active {
+      color: #38bdf8;
+    }
+
+    /* Floating Badges outside the phone */
+    .floating-badge {
+      position: absolute;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      animation: floatSlow 4s ease-in-out infinite alternate;
+    }
+
+    .floating-badge.badge-top-left {
+      top: 12%;
+      left: -20px;
+      animation-delay: 0s;
+    }
+
+    .floating-badge.badge-bottom-right {
+      bottom: 12%;
+      right: -20px;
+      animation-delay: 2s;
+    }
+
+    @keyframes floatSlow {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .badge-icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: rgba(56, 189, 248, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--flutter-light);
+    }
+
+    .badge-icon-box svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .badge-text-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .badge-text-sub {
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       About Section
+       ========================================================================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+
+    .about-bio-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .about-bio-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    .about-highlights {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .highlight-icon {
+      color: var(--flutter-light);
+      flex-shrink: 0;
+    }
+
+    /* Quick Facts Cards */
+    .quick-facts-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .fact-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: all var(--transition-fast);
+      box-shadow: var(--card-shadow);
+    }
+
+    .fact-card:hover {
+      border-color: var(--flutter-light);
+      transform: translateX(4px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .fact-icon-container {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(2, 132, 199, 0.12);
+      color: var(--flutter-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fact-icon-container svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .fact-title {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .fact-value {
+      font-size: 0.975rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .fact-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.15rem;
+    }
+
+    /* ==========================================================================
+       Skills Section (Grouped Cards)
+       ========================================================================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .skill-group-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      transition: all var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .skill-group-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .skill-group-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .skill-group-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm);
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--flutter-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .skill-group-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .skill-group-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .skill-tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .skill-tag {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition-fast);
+    }
+
+    .skill-tag:hover {
+      border-color: var(--flutter-light);
+      color: var(--flutter-light);
+      background: rgba(56, 189, 248, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .skill-tag.featured {
+      background: rgba(2, 132, 199, 0.12);
+      border-color: rgba(2, 132, 199, 0.35);
+      color: var(--flutter-light);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       Projects Section (Card Grid)
+       ========================================================================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all var(--transition-normal);
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .project-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-6px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .project-banner {
+      height: 150px;
+      background: linear-gradient(135deg, #0f1c3f 0%, #0369a1 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    [data-theme="light"] .project-banner {
+      background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+    }
+
+    .project-banner-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.12;
+      background-image: radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    .project-banner-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      transition: transform var(--transition-normal);
+    }
+
+    [data-theme="light"] .project-banner-icon {
+      background: rgba(2, 132, 199, 0.2);
+      color: #02569B;
+      border-color: rgba(2, 132, 199, 0.3);
+    }
+
+    .project-card:hover .project-banner-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .project-banner-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .project-badge-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .project-content {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .project-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.65rem;
+      color: var(--text-primary);
+    }
+
+    .project-desc {
+      font-size: 0.925rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .project-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+    }
+
+    .project-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+
+    .project-actions .btn {
+      flex: 1;
+    }
+
+    /* ==========================================================================
+       Experience Section (Timeline)
+       ========================================================================== */
+    .timeline {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 7px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--flutter-sky) 0%, rgba(56, 189, 248, 0.1) 100%);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      top: 6px;
+      left: -2rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg-primary);
+      border: 3px solid var(--flutter-light);
+      box-shadow: 0 0 12px var(--glow-accent);
+      z-index: 2;
+    }
+
+    .timeline-content-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      transition: all var(--transition-normal);
+    }
+
+    .timeline-content-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .timeline-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-role {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .timeline-period {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      padding: 0.25rem 0.75rem;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--flutter-light);
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .timeline-company {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--flutter-light);
+      margin-bottom: 1.25rem;
+    }
+
+    .timeline-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .timeline-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .timeline-list li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--flutter-light);
+      font-weight: bold;
+    }
+
+    /* ==========================================================================
+       Certifications Section
+       ========================================================================== */
+    .cert-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      transition: all var(--transition-normal);
+    }
+
+    .cert-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .cert-badge-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--flutter-light);
+      flex-shrink: 0;
+    }
+
+    .cert-badge-icon svg {
+      width: 38px;
+      height: 38px;
+    }
+
+    .cert-info {
+      flex-grow: 1;
+    }
+
+    .cert-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.35rem;
+      color: var(--text-primary);
+    }
+
+    .cert-issuer {
+      font-size: 0.95rem;
+      color: var(--flutter-light);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .cert-desc {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .cert-date {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+
+    /* ==========================================================================
+       Contact Section
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-header-text h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-items-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .contact-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      background: rgba(2, 132, 199, 0.1);
+      color: var(--flutter-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon-box svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .contact-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: color var(--transition-fast);
+    }
+
+    .contact-value:hover {
+      color: var(--flutter-light);
+    }
+
+    /* Contact Action Form / Direct Sender */
+    .contact-form-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .form-input,
+    .form-textarea {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: all var(--transition-fast);
+    }
+
+    .form-input:focus,
+    .form-textarea:focus {
+      border-color: var(--flutter-light);
+      box-shadow: 0 0 0 3px var(--glow-accent);
+      outline: none;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .copy-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--bg-surface);
+      border: 1px solid var(--flutter-light);
+      color: var(--text-primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-full);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transform: translateY(100px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all var(--transition-normal);
+      z-index: 2000;
+    }
+
+    .copy-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ==========================================================================
+       Footer
+       ========================================================================== */
+    .footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0 2rem;
+      margin-top: auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .back-to-top-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .back-to-top-btn:hover {
+      color: var(--flutter-light);
+      border-color: var(--flutter-light);
+      transform: translateY(-3px);
+    }
+
+    .back-to-top-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ==========================================================================
+       Scroll Reveal Animations
+       ========================================================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays for child items */
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ==========================================================================
+       Responsive Media Queries
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+        text-align: center;
+      }
+
+      .hero-content {
+        align-items: center;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-tech-pills {
+        justify-content: center;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 4.5rem 0;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hamburger-btn {
+        display: flex;
+      }
+
+      .floating-badge.badge-top-left {
+        left: -10px;
+        top: 8%;
+      }
+
+      .floating-badge.badge-bottom-right {
+        right: -10px;
+        bottom: 8%;
+      }
+
+      .phone-mockup {
+        width: 270px;
+        height: 530px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-highlights {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.25rem;
+      }
+
+      .footer-top,
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-name {
+        font-size: 2.1rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .timeline {
+        padding-left: 1.5rem;
+      }
+
+      .timeline-marker {
+        left: -1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Sticky Navigation Bar
+       ========================================================================== -->
+  <header class="header" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="brand-logo" aria-label="Ahmed Mohamed Fayez - Home">
+        <!-- Flutter-inspired custom SVG logo -->
+        <svg class="flutter-glyph" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.3 2L4 12.3L7.7 16L19 4.7H14.3V2Z" fill="#02569B"/>
+          <path d="M14.3 12L8.6 17.7L12.3 21.4L18 15.7L14.3 12Z" fill="#0175C2"/>
+          <path d="M18 15.7L14.3 19.4H19L21.7 16.7L18 15.7Z" fill="#38BDF8"/>
+        </svg>
+        <span>Ahmed<span class="logo-code">.dev</span></span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#certifications" class="nav-link">Certifications</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav Actions (Theme Switch + Mobile Hamburger) -->
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle light and dark theme">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg class="sun-icon" viewBox="0 0 24 24">
+            <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM1 11H4V13H1V11ZM20 11H23V13H20V11Z"/>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg class="moon-icon" viewBox="0 0 24 24">
+            <path d="M10 7C10 10.866 13.134 14 17 14C18.4584 14 19.8164 13.5544 20.9494 12.7903C19.9079 17.4475 15.7567 21 10.75 21C4.81294 21 0 16.1871 0 10.25C0 5.24335 3.55245 1.09207 8.20973 0.0506382C7.44556 1.18357 7 2.54162 7 4C7 5.65685 8.34315 7 10 7Z"/>
+          </svg>
+        </button>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation drawer" aria-expanded="false">
+          <span class="hamburger-line line-1"></span>
+          <span class="hamburger-line line-2"></span>
+          <span class="hamburger-line line-3"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu-drawer" id="mobileDrawer">
+      <ul class="mobile-nav-list">
+        <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+        <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
+        <li><a href="#certifications" class="mobile-nav-link">Certifications</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         Section 1: Hero
+         ========================================================================== -->
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <!-- Hero Text & CTA -->
+        <div class="hero-content reveal">
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            Available for Opportunities
+          </div>
+
+          <h1 class="hero-name">
+            Hi, I'm <br>
+            <span class="gradient-text">Ahmed Mohamed Fayez</span>
+          </h1>
+
+          <div class="hero-title">
+            Flutter Developer | Mobile App Developer (iOS & Android)
+          </div>
+
+          <p class="hero-tagline">
+            Crafting fluid, high-performance cross-platform mobile apps with Dart & Flutter, structured with MVVM clean architecture and Bloc/Cubit.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              <span>View Projects</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+
+            <!-- TODO: Replace with the actual URL or relative path to your CV PDF (e.g., ./Ahmed_Fayez_CV.pdf) -->
+            <a href="#TODO_CV_PDF_LINK" class="btn btn-secondary" id="downloadCvBtn" download="Ahmed_Fayez_CV.pdf" target="_blank" rel="noopener noreferrer">
+              <span>Download CV</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="social-links" style="margin-top: 0.5rem;">
+            <!-- TODO: Replace with your actual GitHub Profile URL (e.g., https://github.com/yourusername) -->
+            <a href="https://github.com/TODO_GITHUB_USERNAME" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+            </a>
+
+            <!-- TODO: Replace with your actual LinkedIn Profile URL (e.g., https://linkedin.com/in/yourusername) -->
+            <a href="https://linkedin.com/in/TODO_LINKEDIN_USERNAME" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+              <svg viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              </svg>
+            </a>
+
+            <!-- Email Direct Action -->
+            <a href="mailto:ahmedfayez345@gmail.com" class="social-btn" aria-label="Send Email">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Quick Tech Tags -->
+          <div class="hero-tech-pills">
+            <span class="tech-pill"><span class="tech-pill-dot"></span>Flutter 3.x</span>
+            <span class="tech-pill"><span class="tech-pill-dot"></span>Dart</span>
+            <span class="tech-pill"><span class="tech-pill-dot"></span>MVVM</span>
+            <span class="tech-pill"><span class="tech-pill-dot"></span>Bloc / Cubit</span>
+            <span class="tech-pill"><span class="tech-pill-dot"></span>Firebase</span>
+            <span class="tech-pill"><span class="tech-pill-dot"></span>REST APIs</span>
+          </div>
+        </div>
+
+        <!-- Hero Mobile Phone Visual Mockup -->
+        <div class="phone-mockup-wrapper reveal reveal-delay-2">
+          <!-- Top Floating Badge -->
+          <div class="floating-badge badge-top-left">
+            <div class="badge-icon-box">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L1 21h22L12 2zm0 4.2l7.53 13.8H4.47L12 6.2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="badge-text-title">Clean MVVM</div>
+              <div class="badge-text-sub">Bloc & Cubit State</div>
+            </div>
+          </div>
+
+          <!-- Phone Bezel Frame -->
+          <div class="phone-mockup">
+            <div class="phone-island">
+              <div class="island-camera"></div>
+            </div>
+
+            <!-- Simulated Flutter Screen -->
+            <div class="phone-screen">
+              <div class="phone-status-bar">
+                <span>9:41</span>
+                <span>5G 100%</span>
+              </div>
+
+              <!-- App Bar -->
+              <div class="phone-app-bar">
+                <div class="phone-app-bar-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14.3 2L4 12.3L7.7 16L19 4.7H14.3V2Z"/>
+                    <path d="M14.3 12L8.6 17.7L12.3 21.4L18 15.7L14.3 12Z"/>
+                  </svg>
+                  <span>Ahmed's App</span>
+                </div>
+                <span style="font-size: 0.65rem; color: #38bdf8;">v2.6</span>
+              </div>
+
+              <!-- App Body -->
+              <div class="phone-body">
+                <!-- Profile / Hero Card inside the app -->
+                <div class="phone-card">
+                  <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+                    <!-- Profile avatar placeholder inside mobile UI -->
+                    <!-- TODO: You can customize or add your profile picture path here -->
+                    <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #0284c7, #38bdf8); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.8rem; color: white;">
+                      AF
+                    </div>
+                    <div>
+                      <div class="phone-card-title">Ahmed M. Fayez</div>
+                      <div style="font-size: 0.62rem; color: #38bdf8;">Flutter Specialist</div>
+                    </div>
+                  </div>
+                  <div class="phone-state-badge">
+                    <span style="width: 5px; height: 5px; background: #38bdf8; border-radius: 50%;"></span>
+                    BlocState: Emit(Ready)
+                  </div>
+                </div>
+
+                <!-- Metrics Grid inside App -->
+                <div class="phone-metrics-grid">
+                  <div class="phone-metric-item">
+                    <div class="phone-metric-val">60 FPS</div>
+                    <div class="phone-metric-lbl">Fluid Rendering</div>
+                  </div>
+                  <div class="phone-metric-item">
+                    <div class="phone-metric-val">100%</div>
+                    <div class="phone-metric-lbl">Cross-Platform</div>
+                  </div>
+                </div>
+
+                <!-- Recent Project preview chip -->
+                <div class="phone-card">
+                  <div class="phone-card-title">🛒 E-Commerce & PayMob</div>
+                  <div class="phone-card-desc">REST API integration with real-time checkout pipeline.</div>
+                  <div style="margin-top: 0.4rem; display: flex; gap: 4px;">
+                    <span style="font-size: 0.58rem; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">SOLID</span>
+                    <span style="font-size: 0.58rem; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px;">Cubit</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Phone Bottom Navigation Bar -->
+              <div class="phone-nav-bar">
+                <div class="phone-nav-icon active">
+                  <span>📱</span>
+                  <span>Home</span>
+                </div>
+                <div class="phone-nav-icon">
+                  <span>⚡</span>
+                  <span>Skills</span>
+                </div>
+                <div class="phone-nav-icon">
+                  <span>🚀</span>
+                  <span>Apps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Floating Badge -->
+          <div class="floating-badge badge-bottom-right">
+            <div class="badge-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="badge-text-title">iOS & Android</div>
+              <div class="badge-text-sub">Single Dart Codebase</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 2: About Me
+         ========================================================================== -->
+    <section class="about" id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-badge">Get to know me</span>
+          <h2 class="section-title">About <span class="gradient-text">Ahmed</span></h2>
+          <p class="section-subtitle">Dedicated Mobile Engineer crafting robust user experiences backed by strong software principles.</p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Bio Narrative Card -->
+          <div class="about-bio-card reveal">
+            <div>
+              <h3 style="font-size: 1.45rem; margin-bottom: 1rem; color: var(--text-primary);">
+                Computer Science Graduate & Passionate Flutter Developer
+              </h3>
+              <p class="about-bio-text">
+                I am a Computer Science graduate and dedicated Flutter developer with a strong software engineering foundation. I build high-performance, cross-platform mobile apps using Dart and Flutter, applying MVVM architecture and Bloc/Cubit for scalable, maintainable code.
+              </p>
+              <p class="about-bio-text" style="margin-top: 1rem;">
+                My experience covers integrating RESTful APIs, Firebase services (Auth, Firestore, Cloud Messaging) and payment gateways like PayMob. I write clean code following SOLID principles, work seamlessly in Agile/Scrum environments, and bring natural leadership and proactive problem-solving to every project.
+              </p>
+            </div>
+
+            <!-- Engineering Values -->
+            <div class="about-highlights">
+              <div class="highlight-item">
+                <svg class="highlight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>SOLID Principles</span>
+              </div>
+              <div class="highlight-item">
+                <svg class="highlight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Clean Architecture (MVVM)</span>
+              </div>
+              <div class="highlight-item">
+                <svg class="highlight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>Agile / Scrum Methodologies</span>
+              </div>
+              <div class="highlight-item">
+                <svg class="highlight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>PayMob & Payment Gateways</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Facts Column -->
+          <div class="quick-facts-wrapper reveal reveal-delay-2">
+            <!-- Fact: Education -->
+            <div class="fact-card">
+              <div class="fact-icon-container">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                  <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="fact-title">Education</div>
+                <div class="fact-value">B.Sc. in Computer Science</div>
+                <div class="fact-sub">Benha National University (2026) • Grade: Very Good</div>
+              </div>
+            </div>
+
+            <!-- Fact: Location -->
+            <div class="fact-card">
+              <div class="fact-icon-container">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+              </div>
+              <div>
+                <div class="fact-title">Location</div>
+                <div class="fact-value">Egypt</div>
+                <div class="fact-sub">Available for On-site & Remote Roles Worldwide</div>
+              </div>
+            </div>
+
+            <!-- Fact: Languages -->
+            <div class="fact-card">
+              <div class="fact-icon-container">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="fact-title">Languages</div>
+                <div class="fact-value">Arabic (Native) & English (Very Good)</div>
+                <div class="fact-sub">Fluent technical & professional communication</div>
+              </div>
+            </div>
+
+            <!-- Fact: Focus -->
+            <div class="fact-card">
+              <div class="fact-icon-container">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+              </div>
+              <div>
+                <div class="fact-title">Specialization</div>
+                <div class="fact-value">Cross-Platform iOS & Android</div>
+                <div class="fact-sub">Scalable architectures, clean UI, smooth UX</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 3: Skills
+         ========================================================================== -->
+    <section class="skills" id="skills">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-badge">Technical Arsenal</span>
+          <h2 class="section-title">Skills & <span class="gradient-text">Expertise</span></h2>
+          <p class="section-subtitle">A curated toolbox honed for production-ready, maintainable mobile applications.</p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- 1. Mobile Development -->
+          <div class="skill-group-card reveal">
+            <div class="skill-group-header">
+              <div class="skill-group-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                  <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                </svg>
+              </div>
+              <h3 class="skill-group-title">Mobile Development</h3>
+            </div>
+            <div class="skill-tags-list">
+              <span class="skill-tag featured">Flutter</span>
+              <span class="skill-tag featured">Dart</span>
+              <span class="skill-tag featured">MVVM</span>
+              <span class="skill-tag featured">Bloc / Cubit</span>
+              <span class="skill-tag">Riverpod</span>
+              <span class="skill-tag">Cross-Platform (iOS & Android)</span>
+              <span class="skill-tag">Responsive UI</span>
+            </div>
+          </div>
+
+          <!-- 2. Backend / Data -->
+          <div class="skill-group-card reveal reveal-delay-1">
+            <div class="skill-group-header">
+              <div class="skill-group-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </div>
+              <h3 class="skill-group-title">Backend & Data</h3>
+            </div>
+            <div class="skill-tags-list">
+              <span class="skill-tag featured">RESTful APIs</span>
+              <span class="skill-tag featured">Firebase Auth</span>
+              <span class="skill-tag featured">Cloud Firestore</span>
+              <span class="skill-tag">FCM (Push Notifications)</span>
+              <span class="skill-tag">Shared Preferences</span>
+              <span class="skill-tag">Oracle Database</span>
+              <span class="skill-tag">PayMob Integration</span>
+            </div>
+          </div>
+
+          <!-- 3. Engineering & Architecture -->
+          <div class="skill-group-card reveal reveal-delay-2">
+            <div class="skill-group-header">
+              <div class="skill-group-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+              </div>
+              <h3 class="skill-group-title">Engineering Practices</h3>
+            </div>
+            <div class="skill-tags-list">
+              <span class="skill-tag featured">SOLID Principles</span>
+              <span class="skill-tag featured">Clean Code</span>
+              <span class="skill-tag">Data Structures</span>
+              <span class="skill-tag">Git</span>
+              <span class="skill-tag">GitHub</span>
+              <span class="skill-tag">Design Patterns</span>
+            </div>
+          </div>
+
+          <!-- 4. Other Languages -->
+          <div class="skill-group-card reveal reveal-delay-1">
+            <div class="skill-group-header">
+              <div class="skill-group-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <h3 class="skill-group-title">Other Languages</h3>
+            </div>
+            <div class="skill-tags-list">
+              <span class="skill-tag">C++</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">PHP</span>
+            </div>
+          </div>
+
+          <!-- 5. Soft Skills -->
+          <div class="skill-group-card reveal reveal-delay-2">
+            <div class="skill-group-header">
+              <div class="skill-group-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h3 class="skill-group-title">Professional & Soft Skills</h3>
+            </div>
+            <div class="skill-tags-list">
+              <span class="skill-tag featured">Communication</span>
+              <span class="skill-tag featured">Teamwork & Agile</span>
+              <span class="skill-tag">Leadership</span>
+              <span class="skill-tag">Problem-Solving</span>
+              <span class="skill-tag">Critical Thinking</span>
+              <span class="skill-tag">Time Management</span>
+              <span class="skill-tag">Adaptability</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 4: Projects
+         ========================================================================== -->
+    <section class="projects" id="projects">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-badge">Featured Portfolio</span>
+          <h2 class="section-title">Selected <span class="gradient-text">Projects</span></h2>
+          <p class="section-subtitle">Real-world mobile apps showcasing architecture, state management, and API integrations.</p>
+        </div>
+
+        <div class="projects-grid">
+          <!-- 1. E-commerce App -->
+          <div class="project-card reveal">
+            <div class="project-banner">
+              <div class="project-banner-pattern"></div>
+              <div class="project-banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+              </div>
+              <span class="project-badge-tag">Featured App</span>
+            </div>
+            <div class="project-content">
+              <div>
+                <h3 class="project-title">E-commerce App</h3>
+                <p class="project-desc">
+                  A comprehensive cross-platform shopping application built with clean MVVM architecture and Bloc (Cubit). Consumes RESTful APIs for real-time catalog syncing, user cart persistence, seamless checkout, and PayMob payment gateway integration.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Flutter</span>
+                  <span class="project-tag">Dart</span>
+                  <span class="project-tag">RESTful APIs</span>
+                  <span class="project-tag">MVVM</span>
+                  <span class="project-tag">Bloc / Cubit</span>
+                  <span class="project-tag">PayMob</span>
+                </div>
+              </div>
+              <div class="project-actions">
+                <!-- TODO: Replace with your actual GitHub repository URL -->
+                <a href="https://github.com/TODO_GITHUB_USERNAME/ecommerce-app" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <!-- TODO: Replace with live demo APK, video demo, or store link -->
+                <a href="#TODO_PROJECT_DEMO_LINK" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Demo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. News App -->
+          <div class="project-card reveal reveal-delay-1">
+            <div class="project-banner">
+              <div class="project-banner-pattern"></div>
+              <div class="project-banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                  <path d="M18 14h-8"></path>
+                  <path d="M15 18h-5"></path>
+                  <path d="M10 6h8v4h-8V6Z"></path>
+                </svg>
+              </div>
+              <span class="project-badge-tag">News Feed</span>
+            </div>
+            <div class="project-content">
+              <div>
+                <h3 class="project-title">News App</h3>
+                <p class="project-desc">
+                  Dynamic mobile news reader providing up-to-the-minute global headlines. Implements RESTful API consumption, topic filtering, smooth pagination, offline caching, and responsive UI built on MVVM architecture with Cubit state management.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Flutter</span>
+                  <span class="project-tag">Dart</span>
+                  <span class="project-tag">RESTful APIs</span>
+                  <span class="project-tag">MVVM</span>
+                  <span class="project-tag">Bloc / Cubit</span>
+                  <span class="project-tag">Responsive UI</span>
+                </div>
+              </div>
+              <div class="project-actions">
+                <!-- TODO: Replace with your actual GitHub repository URL -->
+                <a href="https://github.com/TODO_GITHUB_USERNAME/news-app" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <!-- TODO: Replace with live demo APK, video demo, or store link -->
+                <a href="#TODO_PROJECT_DEMO_LINK" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Demo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Movies App -->
+          <div class="project-card reveal reveal-delay-2">
+            <div class="project-banner">
+              <div class="project-banner-pattern"></div>
+              <div class="project-banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                  <line x1="7" y1="2" x2="7" y2="22"></line>
+                  <line x1="17" y1="2" x2="17" y2="22"></line>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <line x1="2" y1="7" x2="7" y2="7"></line>
+                  <line x1="2" y1="17" x2="7" y2="17"></line>
+                  <line x1="17" y1="17" x2="22" y2="17"></line>
+                  <line x1="17" y1="7" x2="22" y2="7"></line>
+                </svg>
+              </div>
+              <span class="project-badge-tag">Entertainment</span>
+            </div>
+            <div class="project-content">
+              <div>
+                <h3 class="project-title">Movies App</h3>
+                <p class="project-desc">
+                  An engaging cinema discovery mobile app integrating TMDB RESTful APIs with Firebase authentication and cloud watchlists. Features movie trailers, cast details, reviews, MVVM architecture, and Bloc state management.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Flutter</span>
+                  <span class="project-tag">Dart</span>
+                  <span class="project-tag">RESTful APIs</span>
+                  <span class="project-tag">Firebase</span>
+                  <span class="project-tag">MVVM</span>
+                  <span class="project-tag">Bloc (Cubit)</span>
+                </div>
+              </div>
+              <div class="project-actions">
+                <!-- TODO: Replace with your actual GitHub repository URL -->
+                <a href="https://github.com/TODO_GITHUB_USERNAME/movies-app" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <!-- TODO: Replace with live demo APK, video demo, or store link -->
+                <a href="#TODO_PROJECT_DEMO_LINK" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Demo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Todo App -->
+          <div class="project-card reveal">
+            <div class="project-banner">
+              <div class="project-banner-pattern"></div>
+              <div class="project-banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+              </div>
+              <span class="project-badge-tag">Productivity</span>
+            </div>
+            <div class="project-content">
+              <div>
+                <h3 class="project-title">Todo App</h3>
+                <p class="project-desc">
+                  Cloud-synced task productivity app powered by Cloud Firestore storage and Firebase Cloud Messaging (FCM) automated push notifications. Features task categorization, deadline reminders, and responsive layout.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Flutter</span>
+                  <span class="project-tag">Dart</span>
+                  <span class="project-tag">Firebase Storage</span>
+                  <span class="project-tag">FCM Push Notifications</span>
+                  <span class="project-tag">Responsive UI</span>
+                </div>
+              </div>
+              <div class="project-actions">
+                <!-- TODO: Replace with your actual GitHub repository URL -->
+                <a href="https://github.com/TODO_GITHUB_USERNAME/todo-app" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <!-- TODO: Replace with live demo APK, video demo, or store link -->
+                <a href="#TODO_PROJECT_DEMO_LINK" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Demo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. Islami App -->
+          <div class="project-card reveal reveal-delay-1">
+            <div class="project-banner">
+              <div class="project-banner-pattern"></div>
+              <div class="project-banner-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2a9 9 0 0 0-9 9c0 4.97 4.03 9 9 9 3.09 0 5.82-1.56 7.44-3.95A8.995 8.995 0 0 1 12 2Z"></path>
+                  <path d="M19 10l1.5 1.5L22 10l-1.5-1.5z"></path>
+                </svg>
+              </div>
+              <span class="project-badge-tag">Islamic Lifestyle</span>
+            </div>
+            <div class="project-content">
+              <div>
+                <h3 class="project-title">Islami App</h3>
+                <p class="project-desc">
+                  An elegant Islamic application featuring complete Quran Surah indexing & reading, daily Azkar collection, electronic Sebha (digital tasbeeh counter), prayer times calculator, and bilingual support with dark/light themes.
+                </p>
+                <div class="project-tags">
+                  <span class="project-tag">Flutter</span>
+                  <span class="project-tag">Dart</span>
+                  <span class="project-tag">Clean UI</span>
+                  <span class="project-tag">Audio Integration</span>
+                  <span class="project-tag">Bilingual</span>
+                </div>
+              </div>
+              <div class="project-actions">
+                <!-- TODO: Replace with your actual GitHub repository URL -->
+                <a href="https://github.com/TODO_GITHUB_USERNAME/islami-app" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                <!-- TODO: Replace with live demo APK, video demo, or store link -->
+                <a href="#TODO_PROJECT_DEMO_LINK" class="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                  <span>Demo</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 5: Experience
+         ========================================================================== -->
+    <section class="experience" id="experience">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-badge">Career Track</span>
+          <h2 class="section-title">Hands-on <span class="gradient-text">Experience</span></h2>
+          <p class="section-subtitle">Practical engineering journey across mobile architectures and production codebases.</p>
+        </div>
+
+        <div class="timeline">
+          <!-- Experience Item -->
+          <div class="timeline-item reveal">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content-card">
+              <div class="timeline-meta">
+                <h3 class="timeline-role">Flutter Developer</h3>
+                <span class="timeline-period">Personal Projects & Engineering Practice</span>
+              </div>
+              <div class="timeline-company">Mobile App Engineering • Dart & Flutter Ecosystem</div>
+              
+              <ul class="timeline-list">
+                <li>Integrated REST APIs across E-commerce, News and Movies apps with robust JSON serialization, authentication interceptors, and error handling.</li>
+                <li>Architected scalable state management utilizing Bloc (Cubit) and Riverpod, ensuring complete separation of business logic from UI widgets.</li>
+                <li>Debugged and resolved issues based on user feedback and usage patterns, conducting memory profiling and frame-rate optimization.</li>
+                <li>Enforced SOLID principles and clean MVVM project structures, maintaining reusable repositories and clean presentation layers.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 6: Certifications
+         ========================================================================== -->
+    <section class="certifications" id="certifications">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-badge">Credentials</span>
+          <h2 class="section-title">Certifications & <span class="gradient-text">Training</span></h2>
+          <p class="section-subtitle">Verified technical milestones and networking engineering foundations.</p>
+        </div>
+
+        <div class="cert-container reveal">
+          <div class="cert-card">
+            <div class="cert-badge-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <div class="cert-info">
+              <h3 class="cert-title">CCNA (Cisco Certified Network Associate) - Semester 1</h3>
+              <div class="cert-issuer">Cisco Networking Academy</div>
+              <p class="cert-desc">
+                Completed comprehensive foundational training covering computer networking architectures, IP addressing (IPv4/IPv6), subnetting, network protocols (TCP/UDP, HTTP, DNS), routing principles, and network security essentials.
+              </p>
+              <span class="cert-date">Issued: 2023 • Networking & Systems Foundation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         Section 7: Contact
+         ========================================================================== -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-badge">Get In Touch</span>
+          <h2 class="section-title">Let's Build Something <span class="gradient-text">Great</span></h2>
+          <p class="section-subtitle">Have an exciting opportunity or mobile project? Feel free to reach out directly.</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Contact Info Details -->
+          <div class="contact-info-card reveal">
+            <div>
+              <div class="contact-header-text">
+                <h3>Contact Information</h3>
+                <p>Feel free to reach out via email or phone. I usually respond within 24 hours.</p>
+              </div>
+
+              <div class="contact-items-list">
+                <!-- Email -->
+                <div class="contact-item">
+                  <div class="contact-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:ahmedfayez345@gmail.com" class="contact-value" id="copyEmailLink" title="Click to copy email">
+                      ahmedfayez345@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Phone -->
+                <div class="contact-item">
+                  <div class="contact-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="contact-label">Phone</div>
+                    <a href="tel:+201278786612" class="contact-value">
+                      01278786612
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="contact-item">
+                  <div class="contact-icon-box">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="contact-label">Location</div>
+                    <div class="contact-value">Egypt</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Links in Contact -->
+            <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-subtle);">
+              <div class="contact-label" style="margin-bottom: 0.75rem;">Connect Online</div>
+              <div class="social-links">
+                <!-- TODO: Replace with your actual GitHub Profile URL -->
+                <a href="https://github.com/TODO_GITHUB_USERNAME" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile">
+                  <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <!-- TODO: Replace with your actual LinkedIn Profile URL -->
+                <a href="https://linkedin.com/in/TODO_LINKEDIN_USERNAME" class="social-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+                  <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <a href="mailto:ahmedfayez345@gmail.com" class="social-btn" aria-label="Direct Email">
+                  <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Mailto Form (No Backend Required) -->
+          <div class="contact-form-card reveal reveal-delay-1">
+            <h3 style="font-size: 1.35rem; color: var(--text-primary);">Send a Message</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+              Type your note below to compose an instant email in your favorite email client.
+            </p>
+
+            <form id="contactForm" onsubmit="handleMailtoSubmit(event)">
+              <div class="form-group" style="margin-bottom: 1rem;">
+                <label for="contactSubject" class="form-label">Subject</label>
+                <input type="text" id="contactSubject" class="form-input" placeholder="e.g. Flutter Project Inquiry" required>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 1.5rem;">
+                <label for="contactMessage" class="form-label">Message</label>
+                <textarea id="contactMessage" class="form-textarea" placeholder="Hello Ahmed, I'd like to discuss..." required></textarea>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <span>Compose Email</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                </button>
+
+                <!-- Direct Mailto fallback button -->
+                <a href="mailto:ahmedfayez345@gmail.com" class="btn btn-secondary" style="width: 100%;">
+                  <span>Direct mailto: Link</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Section 8: Footer
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#hero" class="brand-logo">
+            <svg class="flutter-glyph" viewBox="0 0 24 24" fill="none">
+              <path d="M14.3 2L4 12.3L7.7 16L19 4.7H14.3V2Z" fill="#02569B"/>
+              <path d="M14.3 12L8.6 17.7L12.3 21.4L18 15.7L14.3 12Z" fill="#0175C2"/>
+              <path d="M18 15.7L14.3 19.4H19L21.7 16.7L18 15.7Z" fill="#38BDF8"/>
+            </svg>
+            <span>Ahmed Mohamed Fayez</span>
+          </a>
+          <p class="footer-desc">Flutter Developer • Mobile App Developer (iOS & Android)</p>
+        </div>
+
+        <button class="back-to-top-btn" id="backToTopBtn" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="currentYear"></span> Ahmed Mohamed Fayez. All rights reserved.</p>
+        <p>Built with Dart passion, clean code & responsive web standards.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Copy Notification Toast -->
+  <div class="copy-toast" id="copyToast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span id="toastMessage">Email copied to clipboard!</span>
+  </div>
+
+  <!-- ==========================================================================
+       Vanilla JavaScript (Self-contained logic)
+       ========================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Current Year in Footer
+      const yearEl = document.getElementById('currentYear');
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // 2. Light / Dark Theme Toggle with localStorage & System Preference
+      const themeToggleBtn = document.getElementById('themeToggle');
+      const rootHtml = document.documentElement;
+
+      const getPreferredTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) return savedTheme;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      };
+
+      const setTheme = (theme) => {
+        rootHtml.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      };
+
+      // Set initial theme
+      setTheme(getPreferredTheme());
+
+      themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = rootHtml.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+      });
+
+      // 3. Sticky Navbar & Header Shadow on Scroll
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 30) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }, { passive: true });
+
+      // 4. Mobile Hamburger Drawer
+      const hamburgerBtn = document.getElementById('hamburgerBtn');
+      const mobileDrawer = document.getElementById('mobileDrawer');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+      const toggleMenu = () => {
+        const isOpen = hamburgerBtn.classList.toggle('open');
+        mobileDrawer.classList.toggle('open');
+        hamburgerBtn.setAttribute('aria-expanded', isOpen);
+      };
+
+      const closeMenu = () => {
+        hamburgerBtn.classList.remove('open');
+        mobileDrawer.classList.remove('open');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+      };
+
+      hamburgerBtn.addEventListener('click', toggleMenu);
+      mobileNavLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+      // Close drawer if user clicks outside
+      document.addEventListener('click', (e) => {
+        if (!navbar.contains(e.target) && mobileDrawer.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+
+      // 5. ScrollSpy: Active Section Link Highlighting
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      const highlightNavOnScroll = () => {
+        const scrollY = window.pageYOffset;
+
+        sections.forEach(current => {
+          const sectionHeight = current.offsetHeight;
+          const sectionTop = current.offsetTop - 120;
+          const sectionId = current.getAttribute('id');
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      };
+
+      window.addEventListener('scroll', highlightNavOnScroll, { passive: true });
+
+      // 6. Scroll Reveal Observer (Smooth Fade-up)
+      const revealElements = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+
+      // 7. Back to Top Button
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // 8. Copy to Clipboard for Email
+      const copyEmailLink = document.getElementById('copyEmailLink');
+      const copyToast = document.getElementById('copyToast');
+      let toastTimeout;
+
+      const showToast = (message) => {
+        if (copyToast) {
+          const msgEl = document.getElementById('toastMessage');
+          if (msgEl) msgEl.textContent = message;
+          copyToast.classList.add('show');
+          clearTimeout(toastTimeout);
+          toastTimeout = setTimeout(() => {
+            copyToast.classList.remove('show');
+          }, 3000);
+        }
+      };
+
+      if (copyEmailLink) {
+        copyEmailLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          const email = 'ahmedfayez345@gmail.com';
+          navigator.clipboard.writeText(email).then(() => {
+            showToast('Email address copied to clipboard!');
+          }).catch(() => {
+            window.location.href = `mailto:${email}`;
+          });
+        });
+      }
+    });
+
+    // 9. Mailto Form Submitter (Composes message in user's default email client)
+    function handleMailtoSubmit(event) {
+      event.preventDefault();
+      const subject = encodeURIComponent(document.getElementById('contactSubject').value);
+      const message = encodeURIComponent(document.getElementById('contactMessage').value);
+      const email = 'ahmedfayez345@gmail.com';
+      
+      const mailtoUrl = `mailto:${email}?subject=${subject}&body=${message}`;
+      window.location.href = mailtoUrl;
+    }
+  </script>
+</body>
+</html>
